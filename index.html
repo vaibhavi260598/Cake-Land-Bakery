@@ -1,1 +1,1680 @@
-<html></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cake Land Bakery | Fresh Baked Daily</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'playfair': ['Playfair Display', 'serif'],
+            'manrope': ['Manrope', 'sans-serif'],
+          },
+          colors: {
+            'cream': '#FFF8F0',
+            'rose': '#E8B4B8',
+            'rose-dark': '#C9929A',
+            'chocolate': '#5D4037',
+            'caramel': '#D4A574',
+            'honey': '#F5DEB3',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background-color: #FFF8F0;
+      color: #5D4037;
+    }
+
+    @keyframes slideUpBlur {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+        filter: blur(10px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes pulse-soft {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.7;
+      }
+    }
+
+    .animate-slideUp {
+      animation: slideUpBlur 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .delay-100 {
+      animation-delay: 100ms;
+    }
+
+    .delay-200 {
+      animation-delay: 200ms;
+    }
+
+    .delay-300 {
+      animation-delay: 300ms;
+    }
+
+    .delay-400 {
+      animation-delay: 400ms;
+    }
+
+    .delay-500 {
+      animation-delay: 500ms;
+    }
+
+    .nav-link {
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #C9929A;
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.05);
+    }
+
+    .product-card:hover .product-overlay {
+      opacity: 1;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #E8B4B8, #eb4092);
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px -10px rgba(201, 146, 154, 0.5);
+    }
+
+    .section-divider {
+      background: linear-gradient(90deg, transparent, #E8B4B8, transparent);
+      height: 1px;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #FFF8F0;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #E8B4B8;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #C9929A;
+    }
+
+    .marquee {
+      animation: marquee 30s linear infinite;
+    }
+
+    @keyframes marquee {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* Ingredients Section */
+    .ingredients-section {
+      background: #FFF8F0;
+      position: relative;
+    }
+
+    .ingredients-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .ingredient-card {
+      background: #FFFFFF;
+      border-radius: 24px;
+      /* padding: 40px 32px; */
+      text-align: center;
+      transition: all 0.4s ease;
+      border: 1px solid #762c76e3;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ingredient-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #D4876C, #9DB89D);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .ingredient-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(61, 44, 30, 0.08);
+    }
+
+    .ingredient-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .ingredient-icon {
+      /* width: 80px;
+      height: 80px; */
+      margin: 0 auto 24px;
+      /* background: linear-gradient(135deg, #C5DBC5, #E8F0E8); */
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* transition: transform 0.4s ease; */
+    }
+
+    .ingredient-card:hover .ingredient-icon {
+      /* transform: scale(1.1) rotate(5deg); */
+    }
+
+    /* .ingredient-icon svg {
+      width: 40px;
+      height: 40px;
+      color: #9DB89D;
+    } */
+
+    .ingredient-title {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+      color: #3D2C1E;
+    }
+
+    .ingredient-desc {
+      color: #6B5344;
+      line-height: 1.6;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background: linear-gradient(135deg, #d2c5c5 0%, #a3999b 100%);
+      position: relative;
+    }
+
+    .contact-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .contact-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .contact-info {
+      padding: 40px;
+    }
+
+    .contact-info h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 20px;
+    }
+
+    .contact-info p {
+      color: #6B5344;
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-item {
+      display: flex;
+      /* align-items: center; */
+      gap: 16px;
+    }
+
+    .contact-item-icon {
+      width: 50px;
+      height: 50px;
+      background: #FFFFFF;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-item-icon svg {
+      width: 24px;
+      height: 24px;
+      color: var(--accent);
+    }
+
+    .contact-form-wrapper {
+      background: #FFFFFF;
+      border-radius: 32px;
+      padding: 48px;
+      box-shadow: 0 20px 60px rgba(61, 44, 30, 0.08);
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #3D2C1E;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 16px 20px;
+      border: 2px solid #E8DDD4;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: #FDF8F3;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #D4876C;
+      box-shadow: 0 0 0 4px rgba(212, 135, 108, 0.15);
+    }
+
+    .form-input::placeholder {
+      color: #6B5344;
+      opacity: 0.6;
+    }
+
+    textarea.form-input {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 500px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 18px;
+      font-size: 1.1rem;
+    }
+
+    /* Success message */
+    .success-message {
+      display: none;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .success-message.show {
+      display: block;
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--sage-light);
+      border-radius: 50%;
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .success-icon svg {
+      width: 40px;
+      height: 40px;
+      color: #9DB89D;
+    }
+
+    /* --- ANIMATIONS --- */
+    @keyframes floatCake {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(232, 87, 110, 0.2);
+      }
+
+      50% {
+        box-shadow: 0 0 0 25px rgba(232, 87, 110, 0);
+      }
+    }
+
+    /* --- MAIN CIRCLE CONTAINER --- */
+    .cake-circle {
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #d8a2ae96 0%, #FCE9ED 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      animation: pulse 3s ease-in-out infinite;
+      overflow: hidden;
+    }
+
+    /* --- ORBIT SYSTEM --- */
+    .orbit-system {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      animation: spin 12s linear infinite;
+      /* Adjust speed here */
+      pointer-events: none;
+      /* Let clicks pass through */
+    }
+
+    /* Individual Fruit Container */
+    .fruit-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 30px;
+      height: 30px;
+      margin: -15px;
+      /* Center the wrapper */
+    }
+
+    /* Positioning fruits on the orbit circle (Radius approx 140px) */
+    .fw-1 {
+      transform: rotate(0deg) translateX(140px);
+    }
+
+    .fw-2 {
+      transform: rotate(90deg) translateX(140px);
+    }
+
+    .fw-3 {
+      transform: rotate(180deg) translateX(140px);
+    }
+
+    .fw-4 {
+      transform: rotate(270deg) translateX(140px);
+    }
+
+    .fw-5 {
+      transform: rotate(45deg) translateX(140px);
+    }
+
+    /* The Fruit SVG itself */
+    .fruit-body {
+      width: 100%;
+      height: 100%;
+      animation: spin 12s linear infinite reverse;
+      /* Counter-rotation to keep upright */
+    }
+
+    /* --- PASTRY IMAGE --- */
+    .pastry-img {
+      position: relative;
+      z-index: 5;
+      /* Above fruits */
+      animation: floatCake 4s ease-in-out infinite;
+      width: 260px;
+      /* Adjusted size for the image */
+      height: auto;
+      border-radius: 50%;
+      /* Blend mode to remove white background and merge with pink circle */
+      mix-blend-mode: multiply;
+      filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.15));
+    }
+
+    /* --- OTHER STYLES --- */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    .delay-1 {
+      animation-delay: 0.1s;
+      opacity: 0;
+    }
+
+    .delay-2 {
+      animation-delay: 0.2s;
+      opacity: 0;
+    }
+
+    .delay-3 {
+      animation-delay: 0.3s;
+      opacity: 0;
+    }
+
+    .delay-4 {
+      animation-delay: 0.4s;
+      opacity: 0;
+    }
+     /* --- LOCATION SECTION STYLES --- */
+    .location-card {
+      background: #FDECEF;
+      /* border-radius: 20px; */
+      padding: 28px;
+      box-shadow: 0 8px 24px rgba(61, 41, 20, 0.06);
+      /* margin-top: 40px; Space from testimonials */
+    }
+
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      margin: 24px 0;
+      padding: 20px 0;
+      border-top: 1px solid #EEE;
+      border-bottom: 1px solid #EEE;
+    }
+
+    .loc-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .loc-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #FDE8EC;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: #E8576E;
+    }
+
+    .badge-upcoming {
+      display: inline-block;
+      background: #FFF3E0;
+      color: #EF6C00;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 12px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    .map-placeholder {
+      width: 100%;
+      height: 200px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .map-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+        .testimonial-box {
+      border-radius: 18px; padding: 22px 24px;
+      display: flex; align-items: flex-start; gap: 16px;
+      transition: all 0.4s ease; border: 1px solid rgba(0,0,0,0.03);
+      margin-bottom: 31px;
+      
+      
+    }
+    .testimonial-box.green { background:#ebc9cc87; box-shadow: 7px 10px 4px -3px #dda9ce; }
+    .testimonial-box.yellow { background:#ebc9cc87; box-shadow: 7px 10px 4px -3px #dda9ce; }
+    .testimonial-box.blue { background: #ebc9cc87; box-shadow: 7px 10px 4px -3px #dda9ce; }
+
+    .testimonial-box:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+
+    .icon-circle { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .icon-green { background: linear-gradient(135deg, #43A047 0%, #2E7D32 100%); }
+    .icon-yellow { background: linear-gradient(135deg, #FFA000 0%, #FF8F00 100%); }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-cream/95 backdrop-blur-md border-b border-rose/20">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="flex items-center justify-between h-20">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3">
+          <div class="w-12 h-12 flex items-center justify-center">
+            <img src="assets/favicon/favicon.ico" class="rounded-full" />
+          </div>
+          <span class="font-playfair text-2xl font-bold text-chocolate">Cake Land Bakery</span>
+        </a>
+
+        <!-- Desktop Nav -->
+        <div class="hidden lg:flex items-center gap-8">
+          <a href="#menu" class="nav-link text-chocolate/80 hover:text-chocolate transition-colors font-medium">Menu</a>
+          <a href="#about" class="nav-link text-chocolate/80 hover:text-chocolate transition-colors font-medium">Our
+            Story</a>
+          <a href="#locations"
+            class="nav-link text-chocolate/80 hover:text-chocolate transition-colors font-medium">Locations</a>
+          <a href="#catering"
+            class="nav-link text-chocolate/80 hover:text-chocolate transition-colors font-medium">Catering</a>
+          <a href="#contact"
+            class="nav-link text-chocolate/80 hover:text-chocolate transition-colors font-medium">Contact</a>
+        </div>
+
+        <!-- CTA & Mobile Menu -->
+        <div class="flex items-center gap-4">
+          <a href="#order"
+            class="hidden md:inline-flex btn-primary text-white px-6 py-3 rounded-full font-semibold text-sm">
+            Order Online
+          </a>
+          <button id="mobile-menu-btn" class="lg:hidden p-2 text-chocolate">
+            <iconify-icon icon="solar:hamburger-menu-linear" class="text-2xl"></iconify-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="lg:hidden hidden bg-cream border-t border-rose/20">
+      <div class="px-6 py-6 space-y-4">
+        <a href="#menu" class="block text-chocolate/80 hover:text-chocolate font-medium py-2">Menu</a>
+        <a href="#about" class="block text-chocolate/80 hover:text-chocolate font-medium py-2">Our Story</a>
+        <a href="#locations" class="block text-chocolate/80 hover:text-chocolate font-medium py-2">Locations</a>
+        <a href="#catering" class="block text-chocolate/80 hover:text-chocolate font-medium py-2">Catering</a>
+        <a href="#contact" class="block text-chocolate/80 hover:text-chocolate font-medium py-2">Contact</a>
+        <a href="#order" class="btn-primary text-white px-6 py-3 rounded-full font-semibold text-sm inline-block mt-4">
+          Order Online
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="pt-20 relative overflow-hidden">
+    <!-- Decorative Elements -->
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+        <!-- Left Content -->
+        <div class="animate-slideUp">
+          <div class="inline-flex items-center gap-2 bg-rose/20 px-4 py-2 rounded-full mb-6">
+            <span class="w-2 h-2 bg-rose rounded-full animate-pulse"></span>
+            <span class="text-sm font-semibold text-rose-dark uppercase tracking-wider">Fresh Baked Daily</span>
+          </div>
+
+          <h1 class="font-playfair text-5xl lg:text-7xl font-bold text-chocolate leading-tight mb-6">
+            Baked with
+            <span class="text-rose-dark">Love</span>
+            & Tradition
+          </h1>
+
+          <p class="text-lg text-chocolate/70 leading-relaxed mb-8 max-w-lg">
+            Every creation from our kitchen is a celebration of timeless recipes passed down through generations.
+            Experience the warmth of homemade goodness in every bite.
+          </p>
+
+          <div class="flex flex-wrap gap-4 mb-12">
+            <a href="#menu"
+              class="btn-primary text-white px-8 py-4 rounded-full font-semibold inline-flex items-center gap-2">
+              Explore Menu
+              <iconify-icon icon="solar:arrow-right-linear"></iconify-icon>
+            </a>
+            <a href="#locations"
+              class="bg-white text-chocolate px-8 py-4 rounded-full font-semibold border border-rose/30 hover:border-rose transition-colors inline-flex items-center gap-2">
+              <iconify-icon icon="solar:map-point-linear"></iconify-icon>
+              Find a Location
+            </a>
+          </div>
+
+          <!-- Stats -->
+          <div class="flex gap-8 lg:gap-12">
+            <div>
+              <div class="font-playfair text-3xl lg:text-4xl font-bold text-chocolate">15+</div>
+              <div class="text-sm text-chocolate/60">Years of Baking</div>
+            </div>
+            <div>
+              <div class="font-playfair text-3xl lg:text-4xl font-bold text-chocolate">50+</div>
+              <div class="text-sm text-chocolate/60">Daily Treats</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-center animate-fade delay-2">
+          <div class="cake-circle">
+
+            <!-- THE ORBIT SYSTEM -->
+            <div class="orbit-system">
+              <!-- Fruit 1: Strawberry -->
+              <div class="fruit-wrapper fw-1">
+                <div class="fruit-body">
+                  <svg viewBox="0 0 35 45">
+                    <path d="M17.5 0 C12 5 8 8 5 15 C2 22 3 32 17.5 45 C32 32 33 22 30 15 C27 8 23 5 17.5 0Z"
+                      fill="#E53935" />
+                    <path d="M12 5 C12 5 15 0 17.5 0 C20 0 23 5 23 5" fill="#4CAF50" />
+                    <ellipse cx="12" cy="18" rx="2" ry="3" fill="#FFCDD2" opacity="0.6" />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Fruit 2: Blueberry -->
+              <div class="fruit-wrapper fw-2">
+                <div class="fruit-body">
+                  <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="14" r="10" fill="#3F51B5" />
+                    <circle cx="12" cy="4" r="3" fill="#1A237E" />
+                    <circle cx="8" cy="10" r="1.5" fill="#8C9EFF" opacity="0.5" />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Fruit 3: Strawberry -->
+              <div class="fruit-wrapper fw-3">
+                <div class="fruit-body">
+                  <svg viewBox="0 0 35 45">
+                    <path d="M17.5 0 C12 5 8 8 5 15 C2 22 3 32 17.5 45 C32 32 33 22 30 15 C27 8 23 5 17.5 0Z"
+                      fill="#D32F2F" />
+                    <path d="M12 5 C12 5 15 0 17.5 0 C20 0 23 5 23 5" fill="#388E3C" />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Fruit 4: Blueberry -->
+              <div class="fruit-wrapper fw-4">
+                <div class="fruit-body">
+                  <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="14" r="10" fill="#303F9F" />
+                    <circle cx="12" cy="4" r="3" fill="#1A237E" />
+                    <circle cx="15" cy="12" r="1.5" fill="#8C9EFF" opacity="0.4" />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Fruit 5: Blueberry -->
+              <div class="fruit-wrapper fw-5">
+                <div class="fruit-body">
+                  <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="14" r="10" fill="#5C6BC0" />
+                    <circle cx="12" cy="4" r="3" fill="#283593" />
+                  </svg>
+                </div>
+              </div>
+
+            </div>
+            <!-- End Orbit System -->
+
+            <!-- Real Pastry Image (Attached by User) -->
+            <img
+              src="https://z-cdn-media.chatglm.cn/files/4d8162de-21b9-414e-b1ef-571236d92e1a.png?auth_key=1873397381-322567ee5eb24e44b3768938cce5c26e-0-30995b10be5d8a9c2d34a6b4944caf5a"
+              alt="Strawberry Cheesecake" class="pastry-img">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!--why choose us-->
+    <h1 class="font-playfair text-2xl lg:text-5xl font-bold text-chocolate leading-tight  text-center">
+        Why
+        <span class="text-[#eb4092]">Choose</span>
+        us
+      </h1>
+      <section class="grid grid-cols-3 grid-row-1 gap-5 mt-8 p-8">
+        <div class="testimonial-box yellow animate-fade delay-3 w-84">
+          <div class="icon-circle icon-green">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5z" />
+              <path d="M2 17l10 5 10-5" />
+              <path d="M2 12l10 5 10-5" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-stylish text-xl font-bold mb-1" style="color: #2E7D32;">Natural Ingredients</h3>
+            <p class="text-xs leading-relaxed" style="color: #1B5E20; opacity: 0.9;">
+              We use only the freshest strawberries and organic dairy products.
+            </p>
+          </div>
+        </div>
+
+        <div class="testimonial-box green animate-fade delay-4 w-84">
+          <div class="icon-circle icon-yellow">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-stylish text-xl font-bold mb-1" style="color: #E65100;">Specialty Cakes</h3>
+            <p class="text-xs leading-relaxed" style="color: #BF360C; opacity: 0.9;">
+              Vegan, vegetarian, sugar-free, and high-protein—without compromise.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="testimonial-box blue animate-fade delay-4 w-84">
+          <div class="icon-circle icon-yellow">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-stylish text-xl font-bold mb-1" style="color: #2a86b4;">On-Time Delivery</h3>
+            <p class="text-xs leading-relaxed" style="color: #2a86b4; opacity: 0.9;">
+              Careful hand-delivery in and around Courtenay, BC.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+
+
+  <!-- Marquee -->
+  <section class="py-6 bg-[#eb4092] overflow-hidden">
+    <div class="flex whitespace-nowrap">
+      <div class="marquee flex items-center gap-8 text-white/90 font-semibold">
+        <span class="flex items-center gap-3"><iconify-icon icon="solar:star-bold"></iconify-icon> Fresh
+          Ingredients</span>
+        <span class="flex items-center gap-3"><iconify-icon icon="solar:star-bold"></iconify-icon> Handcrafted
+          Daily</span>
+        <span class="flex items-center gap-3"><iconify-icon icon="solar:star-bold"></iconify-icon> Family Recipes</span>
+        <span class="flex items-center gap-3"><iconify-icon icon="solar:star-bold"></iconify-icon> Custom Orders</span>
+        <span class="flex items-center gap-3"><iconify-icon icon="solar:star-bold"></iconify-icon> Local Delivery</span>
+        <span class="flex items-center gap-3"><iconify-icon icon="solar:star-bold"></iconify-icon> Fresh
+          Ingredients</span>
+        <span class="flex items-center gap-3"><iconify-icon icon="solar:star-bold"></iconify-icon> Handcrafted
+          Daily</span>
+        <span class="flex items-center gap-3"><iconify-icon icon="solar:star-bold"></iconify-icon> Family Recipes</span>
+        <span class="flex items-center gap-3"><iconify-icon icon="solar:star-bold"></iconify-icon> Custom Orders</span>
+        <span class="flex items-center gap-3"><iconify-icon icon="solar:star-bold"></iconify-icon> Local Delivery</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu Section -->
+  <section id="menu" class="">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <!-- Section Header -->
+      <div class="text-center mb-16 animate-slideUp">
+        <span class="text-rose-dark font-semibold text-sm uppercase tracking-widest">Our Specialties</span>
+        <h2 class="font-playfair text-4xl lg:text-5xl font-bold text-chocolate mt-4 mb-6">
+          Featured Treats
+        </h2>
+        <p class="text-chocolate/70 max-w-2xl mx-auto">
+          From classic layer cakes to our signature cupcakes, every treat is made from scratch using the finest
+          ingredients.
+        </p>
+      </div>
+
+      <!-- Category Tabs -->
+      <div class="flex flex-wrap justify-center gap-3 mb-12">
+        <button
+          class="category-tab active bg-[#eb4092] text-white px-6 py-3 rounded-full font-semibold text-sm transition-all"
+          data-category="all">
+          All Treats
+        </button>
+        <button
+          class="category-tab bg-white text-chocolate px-6 py-3 rounded-full font-semibold text-sm border border-[#eb4092]/30 hover:border-[#eb4092] transition-all"
+          data-category="cakes">
+          Cakes
+        </button>
+        <button
+          class="category-tab bg-white text-chocolate px-6 py-3 rounded-full font-semibold text-sm border border-[#eb4092]/30 hover:border-[#eb4092] transition-all"
+          data-category="cupcakes">
+          Cupcakes
+        </button>
+        <button
+          class="category-tab bg-white text-chocolate px-6 py-3 rounded-full font-semibold text-sm border border-[#eb4092]/30 hover:border-[#eb4092] transition-all"
+          data-category="cookies">
+          Cookies
+        </button>
+        <button
+          class="category-tab bg-white text-chocolate px-6 py-3 rounded-full font-semibold text-sm border border-[#eb4092]/30 hover:border-[#eb4092] transition-all"
+          data-category="pies">
+          Pies & Tarts
+        </button>
+      </div>
+
+      <!-- Products Grid -->
+      <div id="products-grid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Product 1 -->
+        <div
+          class="product-card bg-white border border-[#eb4092] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group"
+          data-category="cakes">
+          <div class="relative aspect-square overflow-hidden">
+            <img src="https://thescranline.com/wp-content/uploads/2025/02/VANILLA-CAKE-25-WEB-02.jpg"
+              alt="Vanilla Layer Cake"
+              class="product-image w-full h-full object-cover transition-transform duration-1000">
+            <div class="absolute top-4 left-4 bg-[#eb4092] text-white text-xs font-bold px-3 py-1 rounded-full">
+              Bestseller
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-playfair text-xl font-bold text-chocolate mb-2">Classic Vanilla Layer</h3>
+            <p class="text-chocolate/60 text-sm mb-4">Light, fluffy vanilla cake with buttercream frosting</p>
+            <!-- <div class="flex justify-between items-center">
+              <span class="font-bold text-rose-dark text-lg">$42.00</span>
+              <div class="flex items-center gap-1 text-amber-400">
+                <iconify-icon icon="solar:star-bold"></iconify-icon>
+                <span class="text-chocolate text-sm">4.9</span>
+              </div>
+            </div> -->
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div
+          class="product-card bg-white border border-[#eb4092] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group"
+          data-category="cupcakes">
+          <div class="relative aspect-square overflow-hidden">
+            <img src="https://www.livewellbakeoften.com/wp-content/uploads/2021/06/Red-Velvet-Cupcakes-3-New-copy.jpg"
+              alt="Red Velvet Cupcakes"
+              class="product-image w-full h-full object-cover transition-transform duration-1000">
+          </div>
+          <div class="p-6">
+            <h3 class="font-playfair text-xl font-bold text-chocolate mb-2">Red Velvet Cupcakes</h3>
+            <p class="text-chocolate/60 text-sm mb-4">Rich red velvet with cream cheese frosting (6 pack)</p>
+            <!-- <div class="flex justify-between items-center">
+              <span class="font-bold text-rose-dark text-lg">$24.00</span>
+              <div class="flex items-center gap-1 text-amber-400">
+                <iconify-icon icon="solar:star-bold"></iconify-icon>
+                <span class="text-chocolate text-sm">4.8</span>
+              </div>
+            </div> -->
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div
+          class="product-card bg-white border border-[#eb4092] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group"
+          data-category="cookies">
+          <div class="relative aspect-square overflow-hidden">
+            <img src="https://cdn.loveandlemons.com/wp-content/uploads/2024/08/chocolate-chip-cookies.jpg"
+              alt="Chocolate Chip Cookies"
+              class="product-image w-full h-full object-cover transition-transform duration-1000">
+            <div class="absolute top-4 left-4 bg-caramel text-white text-xs font-bold px-3 py-1 rounded-full">
+              Popular
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-playfair text-xl font-bold text-chocolate mb-2">Chocolate Chip Cookies</h3>
+            <p class="text-chocolate/60 text-sm mb-4">Chewy, gooey cookies loaded with chocolate chips (12 pack)</p>
+            <!-- <div class="flex justify-between items-center">
+              <span class="font-bold text-rose-dark text-lg">$18.00</span>
+              <div class="flex items-center gap-1 text-amber-400">
+                <iconify-icon icon="solar:star-bold"></iconify-icon>
+                <span class="text-chocolate text-sm">5.0</span>
+              </div>
+            </div> -->
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div
+          class="product-card bg-white border border-[#eb4092] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group"
+          data-category="pies">
+          <div class="relative aspect-square overflow-hidden">
+            <img src="https://www.modernhoney.com/wp-content/uploads/2017/11/Salted-Caramel-Apple-Pie-crop.jpg"
+              alt="Apple Pie" class="product-image w-full h-full object-cover transition-transform duration-1000">
+
+          </div>
+          <div class="p-6">
+            <h3 class="font-playfair text-xl font-bold text-chocolate mb-2">Classic Apple Pie</h3>
+            <p class="text-chocolate/60 text-sm mb-4">Flaky crust filled with cinnamon-spiced apples</p>
+            <!-- <div class="flex justify-between items-center">
+              <span class="font-bold text-rose-dark text-lg">$36.00</span>
+              <div class="flex items-center gap-1 text-amber-400">
+                <iconify-icon icon="solar:star-bold"></iconify-icon>
+                <span class="text-chocolate text-sm">4.7</span>
+              </div>
+            </div> -->
+          </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div
+          class="product-card bg-white border border-[#eb4092] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group"
+          data-category="cakes">
+          <div class="relative aspect-square overflow-hidden">
+            <img src="https://www.lifesambrosia.com/wp-content/uploads/Double-Chocolate-Mint-Fudge-Recipe-06.jpg"
+              alt="Chocolate Fudge Cake"
+              class="product-image w-full h-full object-cover transition-transform duration-1000">
+
+          </div>
+          <div class="p-6">
+            <h3 class="font-playfair text-xl font-bold text-chocolate mb-2">Double Chocolate Fudge</h3>
+            <p class="text-chocolate/60 text-sm mb-4">Decadent chocolate cake with ganache frosting</p>
+            <!-- <div class="flex justify-between items-center">
+              <span class="font-bold text-rose-dark text-lg">$48.00</span>
+              <div class="flex items-center gap-1 text-amber-400">
+                <iconify-icon icon="solar:star-bold"></iconify-icon>
+                <span class="text-chocolate text-sm">4.9</span>
+              </div>
+            </div> -->
+          </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div
+          class="product-card bg-white border border-[#eb4092] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group"
+          data-category="cupcakes">
+          <div class="relative aspect-square overflow-hidden">
+            <img src="https://edsmith.com/wp-content/uploads/2022/10/Confetti-Cupcakes-with-Raspberry-Buttercream.jpg"
+              alt="Funfetti Cupcakes"
+              class="product-image w-full h-full object-cover transition-transform duration-1000">
+
+            <div class="absolute top-4 left-4 bg-rose text-white text-xs font-bold px-3 py-1 rounded-full">
+              Kids Love
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-playfair text-xl font-bold text-chocolate mb-2">Confetti Cupcakes</h3>
+            <p class="text-chocolate/60 text-sm mb-4">Fun vanilla cupcakes with rainbow sprinkles (6 pack)</p>
+            <!-- <div class="flex justify-between items-center">
+              <span class="font-bold text-rose-dark text-lg">$22.00</span>
+              <div class="flex items-center gap-1 text-amber-400">
+                <iconify-icon icon="solar:star-bold"></iconify-icon>
+                <span class="text-chocolate text-sm">4.8</span>
+              </div>
+            </div> -->
+          </div>
+        </div>
+
+        <!-- Product 7 -->
+        <div
+          class="product-card bg-white border border-[#eb4092] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group"
+          data-category="cookies">
+          <div class="relative aspect-square overflow-hidden">
+            <img
+              src="https://assets.sbs.com.au/dims4/default/631732c/2147483647/strip/true/crop/1234x694+0+0/resize/1280x720!/quality/90/?url=https%3A%2F%2Fsbs-au-brightspot.s3.ap-southeast-2.amazonaws.com%2Fdrupal%2Ffood%2Fpublic%2Fao_106_sugar_cookies-swd.jpg&imwidth=1280"
+              alt="Sugar Cookies" class="product-image w-full h-full object-cover transition-transform duration-1000">
+
+          </div>
+          <div class="p-6">
+            <h3 class="font-playfair text-xl font-bold text-chocolate mb-2">Decorated Sugar Cookies</h3>
+            <p class="text-chocolate/60 text-sm mb-4">Hand-decorated seasonal sugar cookies (12 pack)</p>
+            <!-- <div class="flex justify-between items-center">
+              <span class="font-bold text-rose-dark text-lg">$28.00</span>
+              <div class="flex items-center gap-1 text-amber-400">
+                <iconify-icon icon="solar:star-bold"></iconify-icon>
+                <span class="text-chocolate text-sm">4.6</span>
+              </div>
+            </div> -->
+          </div>
+        </div>
+
+        <!-- Product 8 -->
+        <div
+          class="product-card bg-white border border-[#eb4092] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group"
+          data-category="pies">
+          <div class="relative aspect-square overflow-hidden">
+            <img src="https://preppykitchen.com/wp-content/uploads/2016/01/Lemon-Tart-Feature-1n.jpg" alt="Lemon Tart"
+              class="product-image w-full h-full object-cover transition-transform duration-1000">
+          </div>
+          <div class="p-6">
+            <h3 class="font-playfair text-xl font-bold text-chocolate mb-2">Lemon Cream Tart</h3>
+            <p class="text-chocolate/60 text-sm mb-4">Bright lemon curd in buttery shortbread crust</p>
+            <!-- <div class="flex justify-between items-center">
+              <span class="font-bold text-rose-dark text-lg">$32.00</span>
+              <div class="flex items-center gap-1 text-amber-400">
+                <iconify-icon icon="solar:star-bold"></iconify-icon>
+                <span class="text-chocolate text-sm">4.7</span>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+
+      <!-- View All Button -->
+      <div class="text-center mt-12">
+        <a href="#"
+          class="inline-flex items-center gap-2 text-rose-dark font-semibold hover:gap-4 hover:text-[#eb4092] transition-all">
+          View Full Menu
+          <iconify-icon icon="solar:arrow-right-linear"></iconify-icon>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ingredients Section -->
+  <section class="py-20 lg:py-32 bg-gradient-to-b from-cream to-white" id="ingredients">
+    <div>
+      <h2 class="font-playfair text-4xl lg:text-5xl font-bold text-chocolate  mb-4 text-center">Our Premium Ingredients
+      </h2>
+      <p class="text-chocolate/60 text-m mb-4 font-bold text-center">
+        We believe great baking starts with great ingredients. That's why we source only the finest,
+        freshest components for every creation.
+      </p>
+    </div>
+    <div class="ingredients-grid">
+      <div class="ingredient-card animate-on-scroll stagger-1">
+        <div class="ingredient-icon">
+          <!-- <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7L12 12L22 7L12 2Z" />
+            <path d="M2 17L12 22L22 17" />
+            <path d="M2 12L12 17L22 12" />
+          </svg> -->
+          <img
+            src="https://cdn11.bigcommerce.com/s-w6rae6i8cu/images/stencil/original/image-manager/pdp-ingredients-0018-flour.jpg?t=1666654363" />
+        </div>
+        <h3 class="ingredient-title">Premium Flour</h3>
+        <p class="ingredient-desc">Stone-ground, unbleached flour from heritage wheat varieties for the perfect texture.
+        </p>
+      </div>
+
+      <div class="ingredient-card animate-on-scroll stagger-2">
+        <div class="ingredient-icon">
+          <!-- <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12" />
+            <circle cx="12" cy="12" r="4" />
+          </svg> -->
+          <img
+            src="https://cdn11.bigcommerce.com/s-w6rae6i8cu/images/stencil/original/image-manager/pdp-ingredients-0004-eggs.jpg?t=1666654348" />
+        </div>
+        <h3 class="ingredient-title">Farm Fresh Eggs</h3>
+        <p class="ingredient-desc">Free-range eggs from local farms, delivering rich flavor and golden color.</p>
+      </div>
+
+      <div class="ingredient-card animate-on-scroll stagger-3">
+        <div class="ingredient-icon">
+          <!-- <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg> -->
+          <img
+            src="https://cdn11.bigcommerce.com/s-w6rae6i8cu/images/stencil/original/image-manager/pdp-ingredients-0014-butter.jpg?t=1666654359" />
+        </div>
+        <h3 class="ingredient-title">Real Butter</h3>
+        <p class="ingredient-desc">European-style cultured butter with 82% butterfat for unmatched richness.</p>
+      </div>
+
+      <div class="ingredient-card animate-on-scroll stagger-4">
+        <div class="ingredient-icon">
+          <!-- <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 3v18M5.5 8.5L12 3l6.5 5.5M5.5 15.5L12 21l6.5-5.5" />
+          </svg> -->
+          <img src="https://cdn11.bigcommerce.com/s-w6rae6i8cu/images/stencil/original/image-manager/pdp-ingredients-0011-sugar.jpg?t=1666654355" />
+        </div>
+        <h3 class="ingredient-title">Pure Vanilla</h3>
+        <p class="ingredient-desc">Madagascar Bourbon vanilla beans, extracted in-house for authentic flavor.</p>
+      </div>
+
+      <div class="ingredient-card animate-on-scroll stagger-1">
+        <div class="ingredient-icon">
+          <!-- <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+            <line x1="9" y1="9" x2="9.01" y2="9" />
+            <line x1="15" y1="9" x2="15.01" y2="9" />
+          </svg> -->
+          <img src="assets/favicon/image_b3ca629c.png" />
+        </div>
+        <h3 class="ingredient-title">Fresh Fruits</h3>
+        <p class="ingredient-desc">Seasonal, locally-sourced fruits picked at peak ripeness for vibrant taste.</p>
+      </div>
+
+      <div class="ingredient-card animate-on-scroll stagger-2">
+        <div class="ingredient-icon">
+          <!-- <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
+            <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
+            <line x1="6" y1="1" x2="6" y2="4" />
+            <line x1="10" y1="1" x2="10" y2="4" />
+            <line x1="14" y1="1" x2="14" y2="4" />
+          </svg> -->
+          <img
+            src="https://cdn11.bigcommerce.com/s-w6rae6i8cu/images/stencil/original/image-manager/pdp-ingredients-0016-chocolate-chips.jpg?t=1666654361" />
+        </div>
+        <h3 class="ingredient-title">Belgian Chocolate</h3>
+        <p class="ingredient-desc">Single-origin couverture chocolate with 70% cocoa for deep, complex flavor.</p>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Catering Section -->
+  <section id="catering" class="py-20 lg:py-32 bg-[#4f1046b0] text-white relative overflow-hidden">
+    <!-- Decorative -->
+    <div class="absolute top-0 right-0 w-96 h-96 bg-rose/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-64 h-64 bg-caramel/10 rounded-full blur-3xl"></div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="text-rose font-semibold text-sm uppercase tracking-widest">Events & Celebrations</span>
+          <h2 class="font-playfair text-4xl lg:text-5xl font-bold mt-4 mb-6">
+            Make Your Event Sweeter
+          </h2>
+          <p class="text-white/70 leading-relaxed mb-8">
+            From birthdays to weddings, corporate events to holiday parties, our catering team
+            brings the sweetness to every occasion. Custom cakes, dessert bars, and treat boxes
+            tailored to your needs.
+          </p>
+
+          <!-- Services -->
+          <div class="space-y-4 mb-8">
+            <div class="flex items-center gap-4 bg-white/5 rounded-2xl p-4">
+              <div class="w-12 h-12 bg-rose/20 rounded-xl flex items-center justify-center">
+                <iconify-icon icon="solar:cake-bold" class="text-2xl text-rose"></iconify-icon>
+              </div>
+              <div>
+                <h4 class="font-bold">Custom Cakes</h4>
+                <p class="text-sm text-white/60">Wedding, birthday, and celebration cakes</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 bg-white/5 rounded-2xl p-4">
+              <div class="w-12 h-12 bg-rose/20 rounded-xl flex items-center justify-center">
+                <iconify-icon icon="solar:gift-bold" class="text-2xl text-rose"></iconify-icon>
+              </div>
+              <div>
+                <h4 class="font-bold">Gift Boxes</h4>
+                <p class="text-sm text-white/60">Curated assortments for any occasion</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 bg-white/5 rounded-2xl p-4">
+              <div class="w-12 h-12 bg-rose/20 rounded-xl flex items-center justify-center">
+                <iconify-icon icon="solar:buildings-bold" class="text-2xl text-rose"></iconify-icon>
+              </div>
+              <div>
+                <h4 class="font-bold">Corporate Catering</h4>
+                <p class="text-sm text-white/60">Meetings, events, and employee gifts</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-4">
+            <a href="#"
+              class="btn-primary text-white px-8 py-4 rounded-full font-semibold inline-flex items-center gap-2">
+              Start Your Order
+              <iconify-icon icon="solar:arrow-right-linear"></iconify-icon>
+            </a>
+          </div>
+        </div>
+
+        <!-- Images -->
+        <div class="relative h-[500px]">
+          <div class="absolute top-0 right-0 w-64 h-80 rounded-3xl overflow-hidden shadow-2xl transform rotate-3">
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&q=80" alt="Wedding Cake"
+              class="w-full h-full object-cover">
+          </div>
+          <div class="absolute bottom-0 left-0 w-56 h-56 rounded-3xl overflow-hidden shadow-2xl transform -rotate-6">
+            <img src="https://images.unsplash.com/photo-1586788680434-30d324b2d46f?w=600&q=80" alt="Birthday Cake"
+              class="w-full h-full object-cover">
+          </div>
+          <div class="absolute  w-56 h-56 rounded-3xl overflow-hidden shadow-2xl transform -rotate-5">
+            <img src="https://images.unsplash.com/photo-1586788680434-30d324b2d46f?w=600&q=80" alt="Birthday Cake"
+              class="w-full h-full object-cover">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<!-- Location Section (New) -->
+        <section class="location-card animate-fade px-20 overflow-hidden delay-5" id="locations">
+            <div class="flex items-center justify-center gap-3 mb-2">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style="background: #E8576E;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                </div>
+                <h2 class="font-playfair text-4xl lg:text-5xl font-bold text-chocolate  mb-4">Location</h2>
+            </div>
+            
+            <p class="text-sm leading-relaxed mb-2" style="color: #6B5344;">
+                Asset Located in Viman Nagar, close to the Pune International Airport and near the upcoming metro line, which enhances the commercial value of this place.
+            </p>
+
+            <div class="location-grid">
+                <!-- Item 1 -->
+                <div class="loc-item">
+                    <div class="loc-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                             <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-sm" style="color: #3D2914;">Pune International Airport</h4>
+                        <p class="text-xs" style="color: var(--accent);">3.1 Km</p>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="loc-item">
+                    <div class="loc-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="4" y="3" width="16" height="18" rx="2"/>
+                            <path d="M4 9h16"/>
+                            <path d="M10 3v18"/>
+                            <path d="M12 15h2"/>
+                            <path d="M12 12h2"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-sm" style="color: #3D2914;">Pune Railway Station</h4>
+                        <p class="text-xs" style="color: var(--accent);">7 Km</p>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="loc-item">
+                    <div class="loc-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                             <rect x="4" y="3" width="16" height="16" rx="2"/>
+                             <path d="M4 11h16"/>
+                             <path d="M12 3v8"/>
+                             <circle cx="8" cy="15" r="1"/>
+                             <circle cx="16" cy="15" r="1"/>
+                             <path d="M8 19l-2 2"/>
+                             <path d="M16 19l2 2"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-sm" style="color: #3D2914;">Ramwadi Metro Station <span class="badge-upcoming">Upcoming</span></h4>
+                        <p class="text-xs" style="color: var(--accent);">500 m</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Image -->
+            <div class="map-placeholder">
+                <img src="https://z-cdn-media.chatglm.cn/files/c23aad89-9b0a-4062-ac75-b92cd110730d.png?auth_key=1873401366-d106a474c57245308d194c3983cd32e0-0-8e9555d367c0dd6e1235afd4ad19dc6f" alt="Location Map">
+            </div>
+        </section>
+
+  <!-- Contact Section -->
+  <section class="section contact-section" id="contact">
+    <div class="contact-container">
+      <div class="contact-info animate-on-scroll">
+        <h2>Let's Create Something Sweet Together</h2>
+        <p>
+          Whether you're planning a wedding, birthday celebration, or corporate event,
+          our team is here to bring your sweetest dreams to life. Reach out and let's
+          start crafting your perfect confection.
+        </p>
+
+        <div class="contact-details">
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <div>
+              <strong>Visit Our Bakery</strong>
+              <p style="color: #6B5344; margin-top: 4px;">Courtenay, BC, Canada</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+            </div>
+            <div>
+              <strong>Call Us</strong>
+              <p style="color: #6B5344; margin-top: 4px;">+1 (236) 331-5395</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </div>
+            <div>
+              <strong>Opening Hours</strong>
+              <p style="color: #6B5344; margin-top: 4px;">Mon - Sat: 7am - 7pm | Sun: 8am - 5pm</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-wrapper animate-on-scroll stagger-2">
+        <form id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="firstName">First Name</label>
+              <input type="text" id="firstName" class="form-input" placeholder="Your first name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="lastName">Last Name</label>
+              <input type="text" id="lastName" class="form-input" placeholder="Your last name" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address</label>
+            <input type="email" id="email" class="form-input" placeholder="your@email.com" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="subject">Subject</label>
+            <input type="text" id="subject" class="form-input" placeholder="What can we help you with?">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="message">Message</label>
+            <textarea id="message" class="form-input" placeholder="Tell us about your order or event..."
+              required></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary submit-btn">Send Message</button>
+        </form>
+
+        <div class="success-message" id="successMessage">
+          <div class="success-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </div>
+          <h3 style="font-size: 1.5rem; margin-bottom: 12px;">Message Sent!</h3>
+          <p style="color: #6B5344;">Thank you for reaching out. We'll get back to you within 24 hours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <footer class="bg-[#520a47bf] text-white py-16">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <!-- Brand -->
+        <div>
+          <a href="#" class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12  flex items-center justify-center">
+              <img src="assets/favicon/favicon.ico" class="rounded-full" />
+            </div>
+            <span class="font-playfair text-2xl font-bold">Cake land bakery</span>
+          </a>
+          <p class="text-white/60 text-sm leading-relaxed mb-6">
+            Baked with love since 2009. Every treat tells a story of tradition, quality, and passion.
+          </p>
+          <div class="flex gap-3">
+            <a href="#"
+              class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-rose transition-colors">
+              <iconify-icon icon="logos:instagram-icon"></iconify-icon>
+            </a>
+            <a href="#"
+              class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-rose transition-colors">
+              <iconify-icon icon="logos:facebook"></iconify-icon>
+            </a>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="font-bold mb-6">Quick Links</h4>
+          <ul class="space-y-3">
+            <li><a href="#menu" class="text-white/60 hover:text-rose transition-colors">Menu</a></li>
+            <li><a href="#locations" class="text-white/60 hover:text-rose transition-colors">Locations</a></li>
+            <li><a href="#catering" class="text-white/60 hover:text-rose transition-colors">Catering</a></li>
+          </ul>
+        </div>
+
+        <!-- Menu -->
+        <div>
+          <h4 class="font-bold mb-6">Our Treats</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-white/60 hover:text-rose transition-colors">Layer Cakes</a></li>
+            <li><a href="#" class="text-white/60 hover:text-rose transition-colors">Cupcakes</a></li>
+            <li><a href="#" class="text-white/60 hover:text-rose transition-colors">Cookies</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h4 class="font-bold mb-6">Contact Us</h4>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <iconify-icon icon="solar:map-point-linear" class="text-rose text-xl mt-1"></iconify-icon>
+              <span class="text-white/60">Courtenay, BC, Canada</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <iconify-icon icon="solar:phone-linear" class="text-rose text-xl"></iconify-icon>
+              <a href="tel:+1 (236) 331-5395" class="text-white/60 hover:text-rose transition-colors">+1 (236)
+                331-5395</a>
+            </li>
+            <li class="flex items-center gap-3">
+              <iconify-icon icon="solar:letter-linear" class="text-rose text-xl"></iconify-icon>
+              <a href="mailto:cakelandbakery70@gmail.com"
+                class="text-white/60 hover:text-rose transition-colors">cakelandbakery70@gmail.com</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom -->
+      <div class="section-divider mb-8"></div>
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-white/40 text-sm">
+          © 2024 Cake Land Bakery. All rights reserved.
+        </p>
+        <div class="flex gap-6 text-sm">
+          <a href="#" class="text-white/40 hover:text-white transition-colors">Privacy Policy</a>
+          <a href="#" class="text-white/40 hover:text-white transition-colors">Terms of Service</a>
+          <a href="#" class="text-white/40 hover:text-white transition-colors">Accessibility</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      const icon = mobileMenuBtn.querySelector('iconify-icon');
+      if (mobileMenu.classList.contains('hidden')) {
+        icon.setAttribute('icon', 'solar:hamburger-menu-linear');
+      } else {
+        icon.setAttribute('icon', 'solar:close-circle-linear');
+      }
+    });
+
+    // Category Filter
+    const categoryTabs = document.querySelectorAll('.category-tab');
+    const productCards = document.querySelectorAll('.product-card');
+
+    categoryTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Update active state
+        categoryTabs.forEach(t => {
+          t.classList.remove('bg-[#eb4092]', 'text-white');
+          t.classList.add('bg-white', 'text-chocolate');
+        });
+        tab.classList.remove('bg-white', 'text-chocolate');
+        tab.classList.add('bg-[#eb4092]', 'text-white');
+
+        // Filter products
+        const category = tab.dataset.category;
+        productCards.forEach(card => {
+          if (category === 'all' || card.dataset.category === category) {
+            card.style.display = 'block';
+            card.style.animation = 'slideUpBlur 0.5s ease both';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    //contact
+    const contactForm = document.getElementById('contactForm');
+    const successMessage = document.getElementById('successMessage');
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Simulate form submission
+      const submitBtn = contactForm.querySelector('.submit-btn');
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+
+      setTimeout(() => {
+        contactForm.style.display = 'none';
+        successMessage.classList.add('show');
+      }, 1500);
+    });
+
+    // Smooth Scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+          // Close mobile menu if open
+          mobileMenu.classList.add('hidden');
+          mobileMenuBtn.querySelector('iconify-icon').setAttribute('icon', 'solar:hamburger-menu-linear');
+        }
+      });
+    });
+
+    // Navbar background on scroll
+    const navbar = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('shadow-lg');
+      } else {
+        navbar.classList.remove('shadow-lg');
+      }
+    });
+
+
+  </script>
+</body>
+
+</html>
