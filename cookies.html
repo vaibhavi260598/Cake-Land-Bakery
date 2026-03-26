@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cakes | Cake Land Bakery</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'playfair': ['Playfair Display', 'serif'],
+            'manrope': ['Manrope', 'sans-serif'],
+          },
+          colors: {
+            'cream': '#FFF8F0',
+            'rose': '#E8B4B8',
+            'rose-dark': '#C9929A',
+            'chocolate': '#5D4037',
+            'caramel': '#D4A574',
+            'honey': '#F5DEB3',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Manrope', sans-serif;
+      background-color: #FFF8F0;
+      color: #5D4037;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #E8B4B8, #eb4092);
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px -10px rgba(201, 146, 154, 0.5);
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.05);
+    }
+
+    /* Animations */
+    @keyframes slideUpBlur {
+      0% { opacity: 0; transform: translateY(30px); filter: blur(10px); }
+      100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+
+    /* Ken Burns Zoom Effect for Hero Banner */
+    @keyframes kenburns {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.15); }
+    }
+
+    .animate-kenburns {
+      animation: kenburns 20s ease-in-out infinite alternate;
+    }
+
+    .animate-slideUp {
+      animation: slideUpBlur 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .delay-100 { animation-delay: 100ms; }
+    .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; }
+    
+    /* Product Grid Fade In */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-cream/95 backdrop-blur-md border-b border-rose/20">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="flex items-center justify-between h-20">
+        <a href="index.html" class="flex items-center gap-3">
+          <div class="w-10 h-10 flex items-center justify-center">
+            <img src="assets/favicon/favicon.ico" class="rounded-full" />
+          </div>
+          <span class="font-playfair text-xl md:text-2xl font-bold text-chocolate">Cake Land Bakery</span>
+        </a>
+
+        <div class="hidden lg:flex items-center gap-8">
+          <a href="index.html#menu" class="nav-link text-chocolate/80 hover:text-chocolate transition-colors font-medium">Menu</a>
+          <a href="index.html#locations" class="nav-link text-chocolate/80 hover:text-chocolate transition-colors font-medium">Locations</a>
+          <a href="index.html#catering" class="nav-link text-chocolate/80 hover:text-chocolate transition-colors font-medium">Catering</a>
+          <a href="index.html#contact" class="nav-link text-chocolate/80 hover:text-chocolate transition-colors font-medium">Contact</a>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <a href="#" class="hidden md:inline-flex btn-primary text-white px-6 py-3 rounded-full font-semibold text-sm">
+            Order Online
+          </a>
+          <button id="mobile-menu-btn" class="lg:hidden p-2 text-chocolate">
+            <iconify-icon icon="solar:hamburger-menu-linear" class="text-2xl"></iconify-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="lg:hidden hidden bg-cream border-t border-rose/20">
+      <div class="px-6 py-6 space-y-4">
+        <a href="index.html#menu" class="block text-chocolate/80 hover:text-chocolate font-medium py-2">Menu</a>
+        <a href="index.html#locations" class="block text-chocolate/80 hover:text-chocolate font-medium py-2">Locations</a>
+        <a href="index.html#catering" class="block text-chocolate/80 hover:text-chocolate font-medium py-2">Catering</a>
+        <a href="index.html#contact" class="block text-chocolate/80 hover:text-chocolate font-medium py-2">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION: Full Width Banner + Gradient + Text -->
+  <section class="pt-20 relative w-full h-[60vh] md:h-[85vh] overflow-hidden flex items-center justify-center">
+    
+    <!-- 1. Background Image with Zoom Animation -->
+    <div class="absolute inset-0 w-full h-full">
+      <img 
+        src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?q=80&w=2070&auto=format&fit=crop" 
+        alt="Delicious Cakes Banner" 
+        class="w-full h-full object-cover animate-kenburns"
+      >
+    </div>
+
+    <!-- 2. Gradient Overlay (Dark to Transparent) -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+
+    <!-- 3. Text Content (Centered) -->
+    <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+      
+      <span class="inline-block text-white/90 text-sm font-semibold uppercase tracking-widest mb-4 animate-slideUp">
+        Handcrafted With Love
+      </span>
+      
+      <h1 class="font-playfair text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-tight mb-6 animate-slideUp delay-100">
+        Our Cake Collection
+      </h1>
+      
+      <p class="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-8 animate-slideUp delay-200">
+        From timeless classics to modern creations, every cake is a masterpiece baked fresh for your special moments.
+      </p>
+      
+     
+    </div>
+
+  </section>
+
+  <!-- Main Content -->
+  <main class="py-16 flex-grow bg-cream" id="products">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      
+      <!-- Section Header -->
+      <div class="text-center mb-12 animate-slideUp">
+        <span class="text-rose-dark font-semibold text-sm uppercase tracking-widest">Our Specialties</span>
+        <h2 class="font-playfair text-4xl lg:text-5xl font-bold text-chocolate mt-2">Signature Selection</h2>
+      </div>
+
+      <!-- Product Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Product 1 -->
+        <div class="product-card bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group animate-slideUp delay-100">
+          <div class="relative aspect-square overflow-hidden">
+            <img src="https://thescranline.com/wp-content/uploads/2025/02/VANILLA-CAKE-25-WEB-02.jpg" alt="Vanilla Layer Cake"
+              class="product-image w-full h-full object-cover transition-transform duration-1000">
+            <div class="absolute top-4 left-4 bg-[#eb4092] text-white text-xs font-bold px-3 py-1 rounded-full">
+              Bestseller
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-playfair text-xl font-bold text-chocolate mb-2">Classic Vanilla Layer</h3>
+            <div class="flex items-center gap-1 text-amber-400 mb-2">
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <span class="text-chocolate text-xs ml-1">(5.0)</span>
+            </div>
+            <p class="text-chocolate/60 text-sm mb-4">Light, fluffy vanilla cake with buttercream frosting</p>
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-rose-dark text-lg">$42.00</span>
+             
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-card bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group animate-slideUp delay-200">
+          <div class="relative aspect-square overflow-hidden">
+            <img src="https://www.livewellbakeoften.com/wp-content/uploads/2021/06/Red-Velvet-Cupcakes-3-New-copy.jpg" alt="Red Velvet Cake"
+              class="product-image w-full h-full object-cover transition-transform duration-1000">
+          </div>
+          <div class="p-6">
+            <h3 class="font-playfair text-xl font-bold text-chocolate mb-2">Red Velvet Delight</h3>
+            <div class="flex items-center gap-1 text-amber-400 mb-2">
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <iconify-icon icon="solar:star-line-duotone" class="text-gray-300"></iconify-icon>
+              <span class="text-chocolate text-xs ml-1">(4.8)</span>
+            </div>
+            <p class="text-chocolate/60 text-sm mb-4">Classic red velvet with cream cheese frosting layers</p>
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-rose-dark text-lg">$48.00</span>
+             
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group animate-slideUp delay-300">
+          <div class="relative aspect-square overflow-hidden">
+            <img src="https://www.lifesambrosia.com/wp-content/uploads/Double-Chocolate-Mint-Fudge-Recipe-06.jpg" alt="Chocolate Fudge Cake"
+              class="product-image w-full h-full object-cover transition-transform duration-1000">
+          </div>
+          <div class="p-6">
+            <h3 class="font-playfair text-xl font-bold text-chocolate mb-2">Double Chocolate Fudge</h3>
+            <div class="flex items-center gap-1 text-amber-400 mb-2">
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <span class="text-chocolate text-xs ml-1">(5.0)</span>
+            </div>
+            <p class="text-chocolate/60 text-sm mb-4">Decadent chocolate cake with rich ganache frosting</p>
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-rose-dark text-lg">$52.00</span>
+             
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product-card bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group animate-slideUp delay-100">
+          <div class="relative aspect-square overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&q=80" alt="Strawberry Cake"
+              class="product-image w-full h-full object-cover transition-transform duration-1000">
+            <div class="absolute top-4 left-4 bg-caramel text-white text-xs font-bold px-3 py-1 rounded-full">
+              Popular
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-playfair text-xl font-bold text-chocolate mb-2">Strawberry Supreme</h3>
+            <div class="flex items-center gap-1 text-amber-400 mb-2">
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <iconify-icon icon="solar:star-line-duotone" class="text-gray-300"></iconify-icon>
+              <span class="text-chocolate text-xs ml-1">(4.7)</span>
+            </div>
+            <p class="text-chocolate/60 text-sm mb-4">Fresh strawberry layers with whipped cream frosting</p>
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-rose-dark text-lg">$45.00</span>
+             
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="product-card bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group animate-slideUp delay-200">
+          <div class="relative aspect-square overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1586788680434-30d324b2d46f?w=600&q=80" alt="Birthday Cake"
+              class="product-image w-full h-full object-cover transition-transform duration-1000">
+          </div>
+          <div class="p-6">
+            <h3 class="font-playfair text-xl font-bold text-chocolate mb-2">Funfetti Celebration</h3>
+            <div class="flex items-center gap-1 text-amber-400 mb-2">
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <span class="text-chocolate text-xs ml-1">(5.0)</span>
+            </div>
+            <p class="text-chocolate/60 text-sm mb-4">Rainbow sprinkle cake with vanilla buttercream</p>
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-rose-dark text-lg">$38.00</span>
+             
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="product-card bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group animate-slideUp delay-300">
+          <div class="relative aspect-square overflow-hidden">
+            <img src="https://preppykitchen.com/wp-content/uploads/2016/01/Lemon-Tart-Feature-1n.jpg" alt="Lemon Cake"
+              class="product-image w-full h-full object-cover transition-transform duration-1000">
+          </div>
+          <div class="p-6">
+            <h3 class="font-playfair text-xl font-bold text-chocolate mb-2">Lemon Bliss</h3>
+            <div class="flex items-center gap-1 text-amber-400 mb-2">
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <iconify-icon icon="solar:star-bold"></iconify-icon>
+              <iconify-icon icon="solar:star-line-duotone" class="text-gray-300"></iconify-icon>
+              <span class="text-chocolate text-xs ml-1">(4.6)</span>
+            </div>
+            <p class="text-chocolate/60 text-sm mb-4">Zesty lemon cake with tangy lemon curd filling</p>
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-rose-dark text-lg">$40.00</span>
+             
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#520a47bf] text-white py-12">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 flex items-center justify-center">
+            <img src="assets/favicon/favicon.ico" class="rounded-full" />
+          </div>
+          <span class="font-playfair text-xl font-bold">Cake Land Bakery</span>
+        </div>
+        <div class="flex gap-6">
+          <a href="index.html" class="text-white/60 hover:text-white transition-colors">Home</a>
+          <a href="index.html#menu" class="text-white/60 hover:text-white transition-colors">Menu</a>
+          <a href="index.html#contact" class="text-white/60 hover:text-white transition-colors">Contact</a>
+        </div>
+        <p class="text-white/40 text-sm">© 2024 Cake Land Bakery. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      const icon = mobileMenuBtn.querySelector('iconify-icon');
+      icon.setAttribute('icon', mobileMenu.classList.contains('hidden') ? 'solar:hamburger-menu-linear' : 'solar:close-circle-linear');
+    });
+  </script>
+</body>
+
+</html>
